@@ -34,6 +34,26 @@ public class MovementScript : MonoBehaviour {
 			rb.AddRelativeForce(toApply);
 		}
 
+		if(Input.GetAxis("Horizontal") > 0.1f){
+			toApply = Vector3.zero;
+			toApply.y = 1 * Input.GetAxis("Horizontal");
+			rb.AddTorque(toApply);
+		}else if(Input.GetAxis("Horizontal") < -0.1f){
+			toApply = Vector3.zero;
+			toApply.y = 1 * Input.GetAxis("Horizontal");
+			rb.AddTorque(toApply);
+		}
+
+		if(Input.GetAxis("Vertical") > 0.1f){
+			toApply = Vector3.zero;
+			toApply.z = 4 * Input.GetAxis("Vertical");
+			rb.AddRelativeForce(toApply);
+		}else if(Input.GetAxis("Vertical") < -0.1f){
+			toApply = Vector3.zero;
+			toApply.z = 4 * Input.GetAxis("Vertical");
+			rb.AddRelativeForce(toApply);
+		}
+
 		toApply = Vector3.zero;
 		toApply.y = forceUp - gravity;
 		Debug.Log("APPLYING " + (forceUp - gravity));
