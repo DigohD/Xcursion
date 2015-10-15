@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SlidingDoor : MonoBehaviour {
 
-	static bool activated = false;
+	static bool activated = true;
 	
 	// Use this for initialization
 	void Start (){
