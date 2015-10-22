@@ -13,7 +13,6 @@ public class SlidingDoor : MonoBehaviour {
 	int stacks = 0;
 	// Update is called once per frame
 	void FixedUpdate () {
-
 		if(activated){
 			transform.Translate(0.001f, 0, 0);
 			stacks++;
