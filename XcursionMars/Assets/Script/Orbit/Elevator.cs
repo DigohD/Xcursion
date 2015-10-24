@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Elevator : MonoBehaviour {
 
+	public GameObject shuttle;
+
 	public Transform goalPos;
 
 	static bool activated = false;
@@ -20,7 +22,7 @@ public class Elevator : MonoBehaviour {
 	void FixedUpdate () {
 		if(activated){
 			Vector3 temp = transform.position;
-			transform.position = Vector3.MoveTowards(transform.position, goalPos.position, 0.001f);
+			transform.position = Vector3.MoveTowards(transform.position, goalPos.position, 0.01f);
 			if(cf != null)
 				cf.follow(transform.position - temp);
 		}
@@ -32,6 +34,11 @@ public class Elevator : MonoBehaviour {
 
 		if(Vector3.Distance(transform.position, goalPos.position) < 0.01f){
 			ShuttleWindow.activateRot();
+
+			transform.parent = shuttle.transform;
+			shuttle.GetComponent<Animator>().enabled = true;
+			shuttle.GetComponent<EntryDirector>().enabled = true;
+
 			AILibrary.playAI(AIWelcome);
 			this.enabled = false;
 		}
