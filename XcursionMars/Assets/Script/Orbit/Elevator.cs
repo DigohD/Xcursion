@@ -12,7 +12,7 @@ public class Elevator : MonoBehaviour {
 	public AudioClip AIWelcome, AIDecouple;
 	public Sprite welcome, decouple;
 
-	public ChairFollow cf;
+	public ChairFollow cf, fellow;
 
 	static bool glassClosed;
 
@@ -33,8 +33,10 @@ public class Elevator : MonoBehaviour {
 		if(activated){
 			Vector3 temp = transform.position;
 			transform.position = Vector3.MoveTowards(transform.position, goalPos.position, 0.01f);
-			if(cf != null)
+			if(cf != null){
 				cf.follow(transform.position - temp);
+				fellow.follow((transform.position - temp) / 1.5f);
+			}
 		}
 
 		if(Vector3.Distance(transform.position, goalPos.position) < 0.25f){
