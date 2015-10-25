@@ -17,7 +17,8 @@ public class EntryDirector : MonoBehaviour {
     public Material marsSkyboxMaterial;
 
 	public Sprite entry, landing;
-	public AudioClip AIEntry, AILanding;
+	public AudioClip AIEntry, AILanding, windClip, atmoClip;
+	public AudioSource wind, rockets;
 
 	float startTime;
 
@@ -83,12 +84,17 @@ public class EntryDirector : MonoBehaviour {
 	
     void EndAnimation()
     {
+		rockets.Stop();
+		wind.Stop();
+		wind.volume = 0.5f;
+		wind.clip = windClip;
+		wind.Play();
 		AILibrary.playAI(AILanding);
 		MonitorScript.monitor.sprite = landing;
         Destroy(GetComponent<Animator>());
     }
 
-	bool entryPlayed;
+	bool entryPlayed, atmoPlayed;
 
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -98,6 +104,15 @@ public class EntryDirector : MonoBehaviour {
 			playEntry();
 			entryPlayed = true;
 		}
+
+		if(time > 13f && !atmoPlayed){
+			wind.PlayOneShot(atmoClip);
+			atmoPlayed = true;
+		}
+
+		if(time > 16f)
+			if(wind.volume > 0.1f)
+				wind.volume = wind.volume - 0.0005f;
 	}
 
 	void playEntry(){
