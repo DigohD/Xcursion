@@ -57,6 +57,7 @@ public class EntryDirector : MonoBehaviour {
 
         for (int i = 0; i < FogGenerators.Length; i++)
         {
+            FogGenerators[i].enableEmission = true;
             FogGenerators[i].Play();
         }
 
