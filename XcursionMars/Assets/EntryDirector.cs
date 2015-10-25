@@ -9,6 +9,7 @@ public class EntryDirector : MonoBehaviour {
     public ParticleSystem EntryFog;
     public GameObject Mars;
     public GameObject Player;
+    public GameObject Classroom;
     public Terrain terrain;
 
     public Material spaceSkyboxMaterial;
@@ -60,8 +61,9 @@ public class EntryDirector : MonoBehaviour {
         }
 
         Destroy(Mars);
+        Classroom.SetActive(false);
 
-        SceneCamera.farClipPlane = 5000;
+        SceneCamera.farClipPlane = 2000;
     }
 	
     void EndAnimation()
