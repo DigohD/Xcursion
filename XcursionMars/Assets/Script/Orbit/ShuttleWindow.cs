@@ -13,15 +13,14 @@ public class ShuttleWindow : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
-
-		if(transform.localRotation.eulerAngles.z < 10f){
+	void FixedUpdate () {
+		if(transform.localRotation.eulerAngles.y < 10f){
 			transform.localEulerAngles = new Vector3(0, 0, 0);
 			activated = false;
 			this.enabled = false;
-		}else if(transform.rotation.eulerAngles.z < 360 && activated)
-			transform.Rotate(new Vector3(0, 0, 0.1f));
+			Elevator.decoupleShip();
+		}else if(transform.rotation.eulerAngles.y < 360 && activated)
+			transform.Rotate(new Vector3(0, -0.1f, 0));
 	}
 
 	public static void activateRot(){

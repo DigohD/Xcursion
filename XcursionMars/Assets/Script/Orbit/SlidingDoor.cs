@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SlidingDoor : MonoBehaviour {
 
-	static bool activated = true;
+	static bool activated = false;
 	
 	// Use this for initialization
 	void Start (){
@@ -14,7 +14,7 @@ public class SlidingDoor : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		if(activated){
-			transform.Translate(0.001f, 0, 0);
+			transform.Translate(0.01f, 0, 0);
 			stacks++;
 		}
 

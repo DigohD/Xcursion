@@ -15,8 +15,15 @@ public class EntryDirector : MonoBehaviour {
     public Material spaceSkyboxMaterial;
     public Material marsSkyboxMaterial;
 
+	public Sprite entry, landing;
+	public AudioClip AIEntry, AILanding;
+
+	float startTime;
+
 	// Use this for initialization
 	void Start () {
+		startTime = Time.time;
+
         RenderSettings.skybox = spaceSkyboxMaterial;
         RenderSettings.fog = false;
 
@@ -52,6 +59,9 @@ public class EntryDirector : MonoBehaviour {
         }
 
         terrain.enabled = true;
+		GameObject missions = GameObject.FindGameObjectWithTag("Mission");
+		missions.GetComponent<MissionActivator>().activateMissions();
+
         //Player modifications
         Player.GetComponent<Rigidbody>().isKinematic = false;
         Light[] playerLights = Player.GetComponentsInChildren<Light>();
@@ -68,11 +78,25 @@ public class EntryDirector : MonoBehaviour {
 	
     void EndAnimation()
     {
+		AILibrary.playAI(AILanding);
+		MonitorScript.monitor.sprite = landing;
         Destroy(GetComponent<Animator>());
     }
 
+	bool entryPlayed;
+
 	// Update is called once per frame
-	void Update () {
-	    
+	void FixedUpdate () {
+		float time = Time.time - startTime;
+
+		if(time > 8f && !entryPlayed){
+			playEntry();
+			entryPlayed = true;
+		}
+	}
+
+	void playEntry(){
+		AILibrary.playAI(AIEntry);
+		MonitorScript.monitor.sprite = entry;
 	}
 }
