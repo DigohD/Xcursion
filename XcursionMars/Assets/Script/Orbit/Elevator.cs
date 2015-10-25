@@ -16,6 +16,8 @@ public class Elevator : MonoBehaviour {
 
 	static bool glassClosed;
 
+	public AudioSource engineAmbient, rockets;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -46,6 +48,7 @@ public class Elevator : MonoBehaviour {
 
 			AILibrary.playAI(AIWelcome);
 			MonitorScript.monitor.sprite = welcome;
+			engineAmbient.Play();
 
 			first = true;
 		}
@@ -56,6 +59,8 @@ public class Elevator : MonoBehaviour {
 
 			shuttle.GetComponent<Animator>().enabled = true;
 			shuttle.GetComponent<EntryDirector>().enabled = true;
+
+			rockets.Play ();
 
 			second = true;
 		}
