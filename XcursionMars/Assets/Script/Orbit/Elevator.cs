@@ -9,14 +9,14 @@ public class Elevator : MonoBehaviour {
 
 	static bool activated = false;
 
-	public AudioClip AIWelcome, AIDecouple;
+	public AudioClip AIWelcome, AIDecouple, elevatorClip;
 	public Sprite welcome, decouple;
 
 	public ChairFollow cf, fellow;
 
 	static bool glassClosed;
 
-	public AudioSource engineAmbient, rockets;
+	public AudioSource engineAmbient, rockets, elevator;
 
 	// Use this for initialization
 	void Start () {
@@ -25,11 +25,18 @@ public class Elevator : MonoBehaviour {
 
 	bool first;
 	bool second;
+	bool elevatorPlayed = false;
 
 	// Update is called once per frame
 	void FixedUpdate () {
 		if(second)
 			return;
+
+		if(activated && !elevatorPlayed){
+			elevator.PlayOneShot(elevatorClip);
+			elevatorPlayed = true;
+		}
+
 		if(activated){
 			Vector3 temp = transform.position;
 			transform.position = Vector3.MoveTowards(transform.position, goalPos.position, 0.01f);
