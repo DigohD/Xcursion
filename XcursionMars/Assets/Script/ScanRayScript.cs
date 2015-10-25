@@ -33,22 +33,22 @@ public class ScanRayScript : MonoBehaviour {
 	private bool scan()
 	{
 		RaycastHit hit;
-		// Cast from the objects position upwards
-		Debug.DrawLine (ps.transform.position, ps.transform.position + (ps.transform.forward * 100), Color.white, 100);
-		if(Physics.Raycast(ps.transform.position, ps.transform.position + (ps.transform.forward * 100), out hit)){
-			GameObject scanned = hit.collider.gameObject;
+		RaycastHit[] hits = Physics.RaycastAll(ps.transform.position, ps.transform.forward);
+
+		for(int i = 0; i < hits.Length; i++){
+			GameObject scanned = hits[i].collider.gameObject;
+			Debug.LogWarning("HIT: " + scanned.name);
 			if(scanned.tag.Equals("Target")){
 				Debug.LogWarning("Target hit: " + scanned.name);
 				Target ts = scanned.GetComponent<Target>();
 				AILibrary.playAI(ts.getAudio());
 				MonitorScript.setMonitor(ts.getMonitorSprite());
-			}else{
-				AILibrary.playAI(scanFailure);
-				MonitorScript.setMonitor(monitorScanFailure);
-				
 			}
 			return true;
 		}
+
+		AILibrary.playAI(scanFailure);
+		MonitorScript.setMonitor(monitorScanFailure);
 		return false;
 	} 
 }
