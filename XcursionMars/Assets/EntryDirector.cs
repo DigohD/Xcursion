@@ -10,6 +10,7 @@ public class EntryDirector : MonoBehaviour {
     public GameObject Mars;
     public GameObject Player;
     public GameObject Classroom;
+    public GameObject Bot;
     public Terrain terrain;
 
     public Material spaceSkyboxMaterial;
@@ -74,6 +75,10 @@ public class EntryDirector : MonoBehaviour {
         Classroom.SetActive(false);
 
         SceneCamera.farClipPlane = 2000;
+
+        //Activate bot entry sequence
+        Bot.SetActive(true);
+        Bot.GetComponent<BotEntryDirector>().StartSequence();
     }
 	
     void EndAnimation()
