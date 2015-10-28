@@ -50,7 +50,7 @@ public class MovementScript : MonoBehaviour {
 			rb.AddRelativeForce(toApply);
 		}else if(Input.GetAxis("Vertical") < -0.1f){
 			toApply = Vector3.zero;
-			toApply.z = 4 * Input.GetAxis("Vertical");
+			toApply.z =  4 * Input.GetAxis("Vertical");
 			rb.AddRelativeForce(toApply);
 		}
 
@@ -58,22 +58,22 @@ public class MovementScript : MonoBehaviour {
 		toApply.y = forceUp - gravity;
 
 		Vector3 rbVelocity = rb.velocity;
-		if(rbVelocity.y > 0.5f){
-			rbVelocity.y = 0.5f;
-		}if(rbVelocity.y < -0.5f){
-			rbVelocity.y = -0.5f;
+		if(rbVelocity.y > 1f){
+			rbVelocity.y = 1f;
+		}if(rbVelocity.y < -1f){
+			rbVelocity.y = -1f;
 		}
 
-		if(rbVelocity.x > 3f){
-			rbVelocity.x = 3f;
-		}if(rbVelocity.x < -3f){
-			rbVelocity.x = -3f;
+		if(rbVelocity.x > 6f){
+			rbVelocity.x = 6f;
+		}if(rbVelocity.x < -6f){
+			rbVelocity.x = -6f;
 		}
 
-		if(rbVelocity.z > 3f){
-			rbVelocity.z = 3f;
-		}if(rbVelocity.z < -3f){
-			rbVelocity.z = -3f;
+		if(rbVelocity.z > 6f){
+			rbVelocity.z = 6f;
+		}if(rbVelocity.z < -6f){
+			rbVelocity.z = -6f;
 		}
 		rb.velocity = rbVelocity;
 
